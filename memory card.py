@@ -5,12 +5,14 @@ from PyQt5.QtWidgets import *
 import databaze
 
 import menu
+import menu2
 app = QApplication([])
 
 window = QWidget()
 window.resize(700, 500)
 
 menu_btn = QPushButton("Меню")
+menu2_btn = QPushButton("Редагувати")
 next_quest_btn = QPushButton("Наступне запитання")
 group_box = QGroupBox("Варіанти відповідей")
 question_lbl = QLabel("Яблуко")
@@ -27,6 +29,7 @@ vidpovistu_btn = QPushButton("Відповісти")
 main_line = QVBoxLayout()
 h1 = QHBoxLayout()
 h1.addWidget(menu_btn)
+h1.addWidget(menu2_btn)
 h1.addStretch(1)
 main_line.addLayout(h1)
 main_line.addWidget(question_lbl)
@@ -74,10 +77,29 @@ def menu_show():
     window.hide()
     menu.menu_window()
     window.show()
+    set_question()
+menu_btn.clicked.connect(menu_show)
+def menu2_show():
+    window.hide()
+    menu2.menu2_window()
+    window.show()
+    set_question()
+menu2_btn.clicked.connect(menu2_show)
+def menu_show():
+    window.hide()
+    menu.menu_window()
+    window.show()
+    set_question()
 menu_btn.clicked.connect(menu_show)
 def next_quest_func():
     databaze.question_number += 1
+    result_lbl.hide()
+    answers[0].show()
+    answers[1].show()
+    answers[2].show()
+    answers[3].show()
     set_question()
+
 
 
 vidpovistu_btn.clicked.connect(answer_click)
